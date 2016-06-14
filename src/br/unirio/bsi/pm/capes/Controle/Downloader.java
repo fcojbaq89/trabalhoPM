@@ -1,9 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package br.unirio.bsi.pm.capes.Controle;
+
+import java.net.URL;
 
 /**
  *
@@ -11,4 +9,24 @@ package br.unirio.bsi.pm.capes.Controle;
  */
 public class Downloader {
     
+    public static String downloadArquivo(String url)
+    {
+        return "todo";
+    }
+    
+    static final String PRIMEIRAURL = "https://s3.amazonaws.com/posgraduacao/programas.xml";
+    
+    public static String retornaSegundaUrl()
+    {
+        //TODO pegar nomePrograma do xml
+        String segundaUrl = "https://s3.amazonaws.com/posgraduacao/" + nomePrograma + "/contents.xml";
+        return segundaUrl;
+    }
+    
+    public static String retornaTerceiraUrl()
+    {
+        //TODO pegar infos do xml
+        String terceiraUrl = "https://s3.amazonaws.com/posgraduacao/" + nomePrograma + "/" + codigoProfessor + ".zip";
+        return terceiraUrl;
+    }
 }
