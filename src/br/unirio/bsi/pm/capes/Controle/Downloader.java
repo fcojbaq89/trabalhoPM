@@ -16,14 +16,14 @@ public class Downloader {
     
     static final String PRIMEIRAURL = "https://s3.amazonaws.com/posgraduacao/programas.xml";
     
-    public static String retornaSegundaUrl()
+    public static String retornaSegundaUrl(String nomePrograma)
     {
         //TODO pegar nomePrograma do xml
         String segundaUrl = "https://s3.amazonaws.com/posgraduacao/" + nomePrograma + "/contents.xml";
         return segundaUrl;
     }
     
-    public static String retornaTerceiraUrl()
+    public static String retornaTerceiraUrl(String nomePrograma, String codigoProfessor)
     {
         //TODO pegar infos do xml
         String terceiraUrl = "https://s3.amazonaws.com/posgraduacao/" + nomePrograma + "/" + codigoProfessor + ".zip";

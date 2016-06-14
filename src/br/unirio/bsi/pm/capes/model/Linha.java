@@ -6,6 +6,7 @@ import java.util.List;
 public class Linha {
 
 	List<Professor> professores;
+        private String nome;
 
 	public Linha() {
 		super();
@@ -53,6 +54,14 @@ public class Linha {
 	@Override
 	public String toString() {
 		return "Linha [professores=" + professores + "]";
+	}
+        
+        public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 }
