@@ -4,12 +4,13 @@ import br.unirio.bsi.pm.capes.Controle.Downloader;
 import br.unirio.bsi.pm.capes.model.Linha;
 import br.unirio.bsi.pm.capes.model.Programa;
 import br.unirio.bsi.pm.gpxcleaner.xml.XmlUtils;
+import java.util.List;
 import org.w3c.dom.Element;
 /**
  *
  * @author Victor
  */
-public class MainContoller {
+public class MainController {
     
     public static void main(String[] args)
     {
@@ -25,12 +26,14 @@ public class MainContoller {
         
         Downloader.downloadArquivo(Downloader.retornaSegundaUrl(p.getNome()));
         
-        //BAIXANDO TERCEIRO ARQUIVO
-        Element contents = PegaXml.getXmlRoot("toDo");
+        //BAIXANDO TERCEIROs ARQUIVOs
+        List<Element> professores = PegaXml.getElementosXml("toDo", "professor");
         
-        for()
+        for (Element professor : professores) {
+            String codigoProfessor = XmlUtils.getStringAttribute(professor, "codigo");
+            Downloader.downloadArquivo(Downloader.retornaTerceiraUrl(p.getNome(), codigoProfessor));
+        }
         
-        Downloader.downloadArquivo(Downloader.retornaTerceiraUrl(p.getNome(), ));
         
         //todo salvar as informações no arquivo .txt
         
