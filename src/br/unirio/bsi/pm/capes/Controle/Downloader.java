@@ -1,6 +1,7 @@
 
 package br.unirio.bsi.pm.capes.Controle;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -22,11 +23,12 @@ public class Downloader {
      */
     public static void downloadArquivo(String url)
     {
-        String nome = url.substring(url.lastIndexOf("/")); //manipulando a string para pegar somente a ultima parte
+        String nome = url.substring(url.lastIndexOf("/")+1); //manipulando a string para pegar somente a ultima parte
+        File arquivo = new File(System.getProperty("user.dir") + "/xml/" + nome);
         try {
             URL website = new URL(url);
             ReadableByteChannel rbc = Channels.newChannel(website.openStream());
-            FileOutputStream fos = new FileOutputStream("xml" + nome);
+            FileOutputStream fos = new FileOutputStream(arquivo);
             fos.getChannel().transferFrom(rbc, 0, Integer.MAX_VALUE);
             
         } catch (MalformedURLException ex) {
