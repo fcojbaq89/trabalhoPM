@@ -18,7 +18,7 @@ public class MainController {
         System.out.println("O programa irá iniciar o download dos arquivos necessários. Aguarde um instante.");
         
         //BAIXANDO PRIMEIRO ARQUIVO
-        Downloader.downloadArquivo(Downloader.PRIMEIRAURL);
+        Downloader.downloadArquivo(Downloader.PRIMEIRA_URL);
         
         //BAIXANDO SEGUNDO ARQUIVO
         Element programas = PegaXml.getXmlRoot(System.getProperty("user.dir") + "/xml/programas.xml"); //toDo: caminho do arquivo baixado

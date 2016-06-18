@@ -39,7 +39,7 @@ public class Downloader {
         System.out.println("Donwload do arquivo " + nome + " efetuado com sucesso");
     }
     
-    static final String PRIMEIRAURL = "https://s3.amazonaws.com/posgraduacao/programas.xml";
+    static final String PRIMEIRA_URL = "https://s3.amazonaws.com/posgraduacao/programas.xml";
     
     public static String retornaSegundaUrl(String nomePrograma)
     {
