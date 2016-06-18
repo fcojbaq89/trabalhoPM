@@ -20,14 +20,14 @@ public class MainController {
         Downloader.downloadArquivo(Downloader.PRIMEIRAURL);
         
         //BAIXANDO SEGUNDO ARQUIVO
-        Element programas = PegaXml.getXmlRoot("toDo"); //toDo: caminho do arquivo baixado
+        Element programas = PegaXml.getXmlRoot("xml/programas.xml"); //toDo: caminho do arquivo baixado
         Programa p = new Programa();
         p.setNome(XmlUtils.getStringAttribute(programas, "nome")); //setando nome do programa no objeto
         
         Downloader.downloadArquivo(Downloader.retornaSegundaUrl(p.getNome()));
         
         //BAIXANDO TERCEIROs ARQUIVOs
-        List<Element> professores = PegaXml.getElementosXml("toDo", "professor");
+        List<Element> professores = PegaXml.getElementosXml("xml/contents.xml", "professor");
         
         for (Element professor : professores) {
             String codigoProfessor = XmlUtils.getStringAttribute(professor, "codigo");
