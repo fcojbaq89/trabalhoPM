@@ -1,6 +1,7 @@
 
 package br.unirio.bsi.pm.capes.Controle;
 
+import static br.unirio.bsi.pm.capes.Controle.MainController.CAMINHO_DO_USUARIO;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -24,7 +25,7 @@ public class Downloader {
     public static void downloadArquivo(String url)
     {
         String nome = url.substring(url.lastIndexOf("/")+1); //manipulando a string para pegar somente a ultima parte
-        File arquivo = new File(System.getProperty("user.dir") + "/xml/" + nome);
+        File arquivo = new File(CAMINHO_DO_USUARIO + "/xml/" + nome);
         try {
             URL website = new URL(url);
             ReadableByteChannel rbc = Channels.newChannel(website.openStream());

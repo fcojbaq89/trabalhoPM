@@ -1,6 +1,5 @@
 package br.unirio.bsi.pm.capes.Controle;
 
-import br.unirio.bsi.pm.capes.model.Programa;
 import br.unirio.bsi.pm.gpxcleaner.xml.XmlUtils;
 import java.io.IOException;
 import java.util.List;
@@ -13,15 +12,17 @@ import org.xml.sax.SAXException;
  */
 public class MainController {
     
+    static final String CAMINHO_DO_USUARIO = System.getProperty("user.dir");
+    
     public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException
-    {
+    {   
         System.out.println("O programa irá iniciar o download dos arquivos necessários. Aguarde um instante.");
         
         //BAIXANDO PRIMEIRO ARQUIVO
         Downloader.downloadArquivo(Downloader.PRIMEIRA_URL);
         
         //BAIXANDO SEGUNDO ARQUIVO
-        Element programas = PegaXml.getXmlRoot(System.getProperty("user.dir") + "/xml/programas.xml"); //toDo: caminho do arquivo baixado
+        Element programas = PegaXml.getXmlRoot(CAMINHO_DO_USUARIO + "/xml/programas.xml"); //toDo: caminho do arquivo baixado
         Element programa = XmlUtils.getSingleElement(programas, "programa");
         
         String nomePrograma = XmlUtils.getStringAttribute(programa, "nome");
@@ -33,10 +34,12 @@ public class MainController {
         for (Element professor : professores) {
             String codigoProfessor = XmlUtils.getStringAttribute(professor, "codigo");
             Downloader.downloadArquivo(Downloader.retornaTerceiraUrl(nomePrograma, codigoProfessor));
+            Unzip.unziparArquivo(codigoProfessor);
         }
         
         
         //ToDo salvar as informações no arquivo .txt
+        
         
     }
 }
