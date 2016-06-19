@@ -1,7 +1,11 @@
 package br.unirio.bsi.pm.capes.Controle;
 
+import br.unirio.bsi.pm.capes.model.Linha;
+import br.unirio.bsi.pm.capes.model.Professor;
+import br.unirio.bsi.pm.capes.model.Programa;
 import br.unirio.bsi.pm.gpxcleaner.xml.XmlUtils;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.Element;
@@ -12,7 +16,7 @@ import org.xml.sax.SAXException;
  */
 public class MainController {
     
-    static final String CAMINHO_DO_USUARIO = System.getProperty("user.dir");
+    static final String CAMINHO_DO_USUARIO = System.getProperty("user.dir"); //definindo o caminho root do projeto
     
     public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException
     {   
@@ -20,22 +24,42 @@ public class MainController {
         
         //BAIXANDO PRIMEIRO ARQUIVO
         Downloader.downloadArquivo(Downloader.PRIMEIRA_URL);
+         
+        Programa p = new Programa();
+        p.setNome(p.leXml());
         
         //BAIXANDO SEGUNDO ARQUIVO
-        Element programas = PegaXml.getXmlRoot(CAMINHO_DO_USUARIO + "/xml/programas.xml"); //toDo: caminho do arquivo baixado
-        Element programa = XmlUtils.getSingleElement(programas, "programa");
-        
-        String nomePrograma = XmlUtils.getStringAttribute(programa, "nome");
-        Downloader.downloadArquivo(Downloader.retornaSegundaUrl(nomePrograma));
+        Downloader.preparaDownloadDois(p.getNome());
         
         //BAIXANDO TERCEIROs ARQUIVOs
-        List<Element> professores = PegaXml.getElementosXml("xml/contents.xml", "professor");
+        Downloader.preparaDownloadTres(p.getNome());
         
-        for (Element professor : professores) {
-            String codigoProfessor = XmlUtils.getStringAttribute(professor, "codigo");
-            Downloader.downloadArquivo(Downloader.retornaTerceiraUrl(nomePrograma, codigoProfessor));
-            Unzip.unziparArquivo(codigoProfessor);
+        //setando valores nos objetos (WORK IN PROGRESS)
+        
+        List<Element> linhasXml = PegaXml.getElementosXml("xml/contents.xml", "linha");
+        
+        List<Linha> listaDeLinhas = new ArrayList();
+        for(Element linha : linhasXml)
+        {
+            Linha ln = new Linha();
+            ln.setNome(XmlUtils.getStringAttribute(linha, "nome"));
+            listaDeLinhas.add(ln);
+            
+            List<Element> professoresXml = XmlUtils.getElements(linha, "professor");
+            List<Professor> listaDeProfessores = new ArrayList();
+            
+            for(Element professor : professoresXml)
+            {
+                Professor prof = new Professor();
+                prof.setNome(XmlUtils.getStringAttribute(professor, "nome"));
+                prof.setCodigo(XmlUtils.getStringAttribute(professor, "codigo"));
+                listaDeProfessores.add(prof);
+            }
+            
+            ln.setProfessores(listaDeProfessores);
         }
+        
+        p.setLinhas(listaDeLinhas);
         
         
         //ToDo salvar as informações no arquivo .txt

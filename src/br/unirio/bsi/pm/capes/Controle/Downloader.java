@@ -2,6 +2,7 @@
 package br.unirio.bsi.pm.capes.Controle;
 
 import static br.unirio.bsi.pm.capes.Controle.MainController.CAMINHO_DO_USUARIO;
+import br.unirio.bsi.pm.gpxcleaner.xml.XmlUtils;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -9,8 +10,12 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.channels.Channels;
 import java.nio.channels.ReadableByteChannel;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.xml.parsers.ParserConfigurationException;
+import org.w3c.dom.Element;
+import org.xml.sax.SAXException;
 
 /**
  *
@@ -42,17 +47,22 @@ public class Downloader {
     
     static final String PRIMEIRA_URL = "https://s3.amazonaws.com/posgraduacao/programas.xml";
     
-    public static String retornaSegundaUrl(String nomePrograma)
+    public static void preparaDownloadDois(String nomePrograma) throws ParserConfigurationException, SAXException, IOException
     {
-        //TODO pegar nomePrograma do xml
         String segundaUrl = "https://s3.amazonaws.com/posgraduacao/" + nomePrograma + "/contents.xml";
-        return segundaUrl;
+        downloadArquivo(segundaUrl);
     }
     
-    public static String retornaTerceiraUrl(String nomePrograma, String codigoProfessor)
+    public static void preparaDownloadTres(String nomePrograma) throws ParserConfigurationException, SAXException, IOException
     {
-        //TODO pegar infos do xml
-        String terceiraUrl = "https://s3.amazonaws.com/posgraduacao/" + nomePrograma + "/" + codigoProfessor + ".zip";
-        return terceiraUrl;
+        List<Element> professores = PegaXml.getElementosXml("xml/contents.xml", "professor");
+        
+        for (Element professor : professores) {
+            String codigoProfessor = XmlUtils.getStringAttribute(professor, "codigo"); //toDo encapsular logica de ler xml
+            String terceiraUrl = "https://s3.amazonaws.com/posgraduacao/" + nomePrograma + "/" + codigoProfessor + ".zip";
+            
+            Downloader.downloadArquivo(terceiraUrl);
+            Unzip.unziparArquivo(codigoProfessor);
+        }
     }
 }

@@ -1,7 +1,13 @@
 package br.unirio.bsi.pm.capes.model;
 
+import br.unirio.bsi.pm.capes.Controle.PegaXml;
+import br.unirio.bsi.pm.gpxcleaner.xml.XmlUtils;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.parsers.ParserConfigurationException;
+import org.w3c.dom.Element;
+import org.xml.sax.SAXException;
 
 public class Programa {
 
@@ -53,6 +59,7 @@ public class Programa {
 		} else if (!nome.equals(other.nome))
 			return false;
 		return true;
+                
 	}
 
 	public String getNome() {
@@ -78,5 +85,14 @@ public class Programa {
 		else
 			return "Programa [nome=" + nome + ", linhas=" + linhas + "]";
 	}
+        
+        public String leXml() throws ParserConfigurationException, SAXException, IOException
+        {
+            Element programas = PegaXml.getXmlRoot(System.getProperty("user.dir") + "/xml/programas.xml");
+            Element programa = XmlUtils.getSingleElement(programas, "programa");
+            String nomePrograma = XmlUtils.getStringAttribute(programa, "nome");
+            
+            return nomePrograma;
+        }
 
 }
