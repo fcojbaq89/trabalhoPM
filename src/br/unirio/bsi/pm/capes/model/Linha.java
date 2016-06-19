@@ -85,25 +85,26 @@ public class Linha {
         
         public void calculaMediaDaLinha()
         {
-            int[] total = {0,0,0,0,0,0,0,0,0};
+            float[] total = {0.0f,0.0f,0.0f,0.0f,0.0f,0.0f,0.0f,0.0f,0.0f};
             List<Professor> profs = this.getProfessores();
-            int totalProfessores = profs.size();
+            float totalProfessores = profs.size();
             
             for(Professor professor : profs)
             {
                 Curriculum curriculo = professor.getCurriculo();
                 int[] dadosCurriculo = curriculo.pegaDadosCurriculo();
-                for (int i = 0; i < totalProfessores; i++) 
+                for (int i = 0; i < 9; i++) 
                 {
-                    total[i] = total[i] + (Integer) dadosCurriculo[i];
+                    total[i] = total[i] + dadosCurriculo[i];
                 }
             }
             
             float [] medias = new float[9];
-            for(int j =0; j < 8; j++)
+            for(int j =0; j < 9; j++)
             {
                 medias[j] = total[j]/totalProfessores;
             }
+            
             this.setMedia(medias);
         }
 
