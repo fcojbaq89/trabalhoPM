@@ -47,6 +47,8 @@ public class Downloader {
     
     static final String PRIMEIRA_URL = "https://s3.amazonaws.com/posgraduacao/programas.xml";
     
+    static final String QUALIS_URL = "https://s3.amazonaws.com/posgraduacao/qualis.xml";
+    
     public static void preparaDownloadDois(String nomePrograma) throws ParserConfigurationException, SAXException, IOException
     {
         String segundaUrl = "https://s3.amazonaws.com/posgraduacao/" + nomePrograma + "/contents.xml";

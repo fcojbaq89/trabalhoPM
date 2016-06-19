@@ -1,7 +1,12 @@
 package br.unirio.bsi.pm.capes.model;
 
+import br.unirio.bsi.pm.capes.Controle.PegaXml;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.parsers.ParserConfigurationException;
+import org.w3c.dom.Element;
+import org.xml.sax.SAXException;
 
 public class Linha {
 
