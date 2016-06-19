@@ -7,7 +7,9 @@ import br.unirio.bsi.pm.capes.model.Programa;
 import br.unirio.bsi.pm.gpxcleaner.xml.XmlUtils;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.Element;
@@ -75,16 +77,25 @@ public class MainController {
         //PARTE FINAL ==========================================================
         //escrevendo o arquivo txt
         PrintWriter writer = new PrintWriter(CAMINHO_DO_USUARIO + "/" + p.getNome() + ".txt", "UTF-8");
+        
+        writer.println("Nome " + "Participações em bancas de Doutorado " + //printando nomes das colunas da tabela
+        "Participações em bancas de Mestrado " + "Participações em bancas de Graduacao " +
+        "Orientações de Doutorado concluídas " + "Orientações de Mestrado concluídas " +
+        "Orientações de projeto final de Graduação concluídas " + "Orientações de Doutorado em andamento " +
+        "Orientações de Doutorado em andamento " + "Orientações de projeto final de Graduação em andamento "
+        );
+        
         for(Linha linha : listaDeLinhas)
         {
             List<Professor> profsDaLinha = linha.getProfessores();
             for(Professor professor : profsDaLinha)
             {
-                writer.println(professor.getNome());
-                writer.println("Orientações de Doutorado em andamento: " + professor.getCurriculo().getDoutoradoAndamento());
+                Curriculum c = professor.getCurriculo();
+                int[] dadosCurriculo = c.pegaDadosCurriculo();
+                writer.println(professor.getNome() + " " + Arrays.toString(dadosCurriculo)); //toDo melhorar formatação
             }
-            
-            writer.println(linha.getNome());
+            linha.calculaMediaDaLinha();
+            writer.println(linha.getNome() + " " + Arrays.toString(linha.getMedia()));
         }
         writer.println(p.getNome());
         writer.close();

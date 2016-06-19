@@ -3,6 +3,7 @@ package br.unirio.bsi.pm.capes.model;
 import br.unirio.bsi.pm.capes.Controle.PegaXml;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.Element;
@@ -12,6 +13,19 @@ public class Linha {
 
 	List<Professor> professores;
         private String nome;
+        private float[] media;
+
+    public float[] getMedia() {
+        return media;
+    }
+
+    public void setMedia(float[] media) {
+        this.media = media;
+    }
+        
+        /*private int partMestradoTotal, partDoutoradoTotal, partGraduacaoTotal, doutoradoConcluidoTotal, 
+        mestradoConcluidoTotal, graduacaoConcluidoTotal, doutoradoAndamentoTotal, 
+        mestradoAndamentoTotal, graduacaoAndamentoTotal;*/
 
 	public Linha() {
 		super();
@@ -68,5 +82,29 @@ public class Linha {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+        
+        public void calculaMediaDaLinha()
+        {
+            int[] total = {0,0,0,0,0,0,0,0,0};
+            List<Professor> profs = this.getProfessores();
+            int totalProfessores = profs.size();
+            
+            for(Professor professor : profs)
+            {
+                Curriculum curriculo = professor.getCurriculo();
+                int[] dadosCurriculo = curriculo.pegaDadosCurriculo();
+                for (int i = 0; i < totalProfessores; i++) 
+                {
+                    total[i] = total[i] + (Integer) dadosCurriculo[i];
+                }
+            }
+            
+            float [] medias = new float[9];
+            for(int j =0; j < 8; j++)
+            {
+                medias[j] = total[j]/totalProfessores;
+            }
+            this.setMedia(medias);
+        }
 
 }
