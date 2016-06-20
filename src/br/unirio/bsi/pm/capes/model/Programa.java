@@ -1,14 +1,20 @@
 package br.unirio.bsi.pm.capes.model;
 
-import br.unirio.bsi.pm.capes.Controle.PegaXml;
-import br.unirio.bsi.pm.gpxcleaner.xml.XmlUtils;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.xml.parsers.ParserConfigurationException;
+
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
+import br.unirio.bsi.pm.capes.Controle.PegaXml;
+import br.unirio.bsi.pm.gpxcleaner.xml.XmlUtils;
+
+/**
+* @author fcojbaq89
+*/
 public class Programa {
 
 	String nome;

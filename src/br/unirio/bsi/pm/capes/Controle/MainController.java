@@ -45,7 +45,7 @@ public class MainController {
         
         List<Element> linhasXml = PegaXml.getElementosXml("xml/contents.xml", "linha");
         
-        List<Linha> listaDeLinhas = new ArrayList();
+        List<Linha> listaDeLinhas = new ArrayList<Linha>();
         for(Element linha : linhasXml)
         {
             Linha ln = new Linha();
@@ -53,7 +53,7 @@ public class MainController {
             listaDeLinhas.add(ln);
             
             List<Element> professoresXml = XmlUtils.getElements(linha, "professor");
-            List<Professor> listaDeProfessores = new ArrayList();
+            List<Professor> listaDeProfessores = new ArrayList<Professor>();
             
             for(Element professor : professoresXml)
             {

@@ -46,7 +46,7 @@ class Artigo {
     
     public static List<Artigo> classificaArtigos(List<Element> listaDeArtigos, String tipo) throws ParserConfigurationException, SAXException, IOException
     {
-        List<Artigo> listaDeArtigosClassificados = new ArrayList();
+        List<Artigo> listaDeArtigosClassificados = new ArrayList<Artigo>();
         List<Element> entradas = PegaXml.getElementosXml("xml/qualis.xml", "entry");
         
         for(Element elementoArtigo : listaDeArtigos)
