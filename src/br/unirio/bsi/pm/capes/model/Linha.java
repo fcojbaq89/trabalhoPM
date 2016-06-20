@@ -93,7 +93,7 @@ public class Linha {
             {
                 Curriculum curriculo = professor.getCurriculo();
                 int[] dadosCurriculo = curriculo.pegaDadosCurriculo();
-                for (int i = 0; i < 9; i++) 
+                for (int i = 0; i < dadosCurriculo.length; i++) 
                 {
                     total[i] = total[i] + dadosCurriculo[i];
                 }

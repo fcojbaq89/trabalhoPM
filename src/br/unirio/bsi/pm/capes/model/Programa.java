@@ -13,6 +13,15 @@ public class Programa {
 
 	String nome;
 	List<Linha> linhas;
+        private float[] media;
+
+    public float[] getMedia() {
+        return media;
+    }
+
+    public void setMedia(float[] media) {
+        this.media = media;
+    }
 
 	public Programa() {
 		super();
@@ -93,6 +102,38 @@ public class Programa {
             String nomePrograma = XmlUtils.getStringAttribute(programa, "nome");
             
             return nomePrograma;
+        }
+        
+        public void calculaMedia()
+        {
+            float[] total = {0.0f,0.0f,0.0f,0.0f,0.0f,0.0f,0.0f,0.0f,0.0f};
+            List<Linha> lns = this.getLinhas();
+            float totalProfessores= 0;
+            
+            for(Linha linha: lns)
+            {
+                List<Professor> professores = linha.getProfessores();
+                for(Professor professor : professores)
+                {
+                    Curriculum curriculo = professor.getCurriculo();
+                    int [] dadosCurriculo = curriculo.pegaDadosCurriculo();
+                    for(int i = 0; i < dadosCurriculo.length; i++)
+                    {
+                        total[i] = total[i] + dadosCurriculo[i];
+                    }
+                    totalProfessores++;
+                }
+                
+            }
+            
+            float [] medias = new float[9];
+            for(int j =0; j < 9; j++)
+            {
+                medias[j] = total[j]/totalProfessores;
+            }
+            
+            this.setMedia(medias);
+            
         }
 
 }

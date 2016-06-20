@@ -97,7 +97,8 @@ public class MainController {
             linha.calculaMediaDaLinha();
             writer.println(linha.getNome() + " " + Arrays.toString(linha.getMedia()));
         }
-        writer.println(p.getNome());
+        p.calculaMedia();
+        writer.println(p.getNome() + " " + Arrays.toString(p.getMedia()));
         writer.close();
     }
 }
