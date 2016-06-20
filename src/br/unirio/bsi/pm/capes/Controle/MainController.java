@@ -7,7 +7,6 @@ import br.unirio.bsi.pm.capes.model.Programa;
 import br.unirio.bsi.pm.gpxcleaner.xml.XmlUtils;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -84,6 +83,7 @@ public class MainController {
         "Orientações de projeto final de Graduação concluídas " + "Orientações de Doutorado em andamento " +
         "Orientações de Doutorado em andamento " + "Orientações de projeto final de Graduação em andamento "
         );
+        writer.println("");
         
         for(Linha linha : listaDeLinhas)
         {
@@ -93,9 +93,12 @@ public class MainController {
                 Curriculum c = professor.getCurriculo();
                 int[] dadosCurriculo = c.pegaDadosCurriculo();
                 writer.println(professor.getNome() + " " + Arrays.toString(dadosCurriculo)); //toDo melhorar formatação
+                writer.println("");
             }
             linha.calculaMediaDaLinha();
             writer.println(linha.getNome() + " " + Arrays.toString(linha.getMedia()));
+            writer.println("");
+            writer.println("");
         }
         p.calculaMedia();
         writer.println(p.getNome() + " " + Arrays.toString(p.getMedia()));

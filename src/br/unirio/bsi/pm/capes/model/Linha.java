@@ -1,13 +1,7 @@
 package br.unirio.bsi.pm.capes.model;
 
-import br.unirio.bsi.pm.capes.Controle.PegaXml;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import javax.xml.parsers.ParserConfigurationException;
-import org.w3c.dom.Element;
-import org.xml.sax.SAXException;
 
 public class Linha {
 
@@ -85,7 +79,8 @@ public class Linha {
         
         public void calculaMediaDaLinha()
         {
-            float[] total = {0.0f,0.0f,0.0f,0.0f,0.0f,0.0f,0.0f,0.0f,0.0f};
+            float[] total = {0.0f,0.0f,0.0f,0.0f,0.0f,0.0f,0.0f,0.0f,0.0f,
+                0.0f,0.0f,0.0f,0.0f,0.0f,0.0f,0.0f,0.0f,0.0f,0.0f,0.0f,0.0f,0.0f,0.0f,0.0f,0.0f};
             List<Professor> profs = this.getProfessores();
             float totalProfessores = profs.size();
             
@@ -99,8 +94,8 @@ public class Linha {
                 }
             }
             
-            float [] medias = new float[9];
-            for(int j =0; j < 9; j++)
+            float [] medias = new float[25];
+            for(int j =0; j < 25; j++)
             {
                 medias[j] = total[j]/totalProfessores;
             }

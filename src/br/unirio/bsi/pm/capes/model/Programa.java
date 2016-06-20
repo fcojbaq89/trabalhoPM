@@ -106,7 +106,9 @@ public class Programa {
         
         public void calculaMedia()
         {
-            float[] total = {0.0f,0.0f,0.0f,0.0f,0.0f,0.0f,0.0f,0.0f,0.0f};
+            float[] total = {0.0f,0.0f,0.0f,0.0f,0.0f,0.0f,0.0f,0.0f,0.0f,
+                0.0f,0.0f,0.0f,0.0f,0.0f,0.0f,0.0f,0.0f,0.0f,
+                0.0f,0.0f,0.0f,0.0f,0.0f,0.0f,0.0f};
             List<Linha> lns = this.getLinhas();
             float totalProfessores= 0;
             
@@ -126,8 +128,8 @@ public class Programa {
                 
             }
             
-            float [] medias = new float[9];
-            for(int j =0; j < 9; j++)
+            float [] medias = new float[25];
+            for(int j =0; j < 25; j++)
             {
                 medias[j] = total[j]/totalProfessores;
             }
