@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 /**
@@ -56,10 +58,16 @@ class Artigo {
             
             if("evento".equalsIgnoreCase(tipo)) //verificando se eh artigo ou revista
             {
-                nomePublicacao = XmlUtils.getStringAttribute(elementoArtigo, "NOME-DO-EVENTO");
+                //nomePublicacao = XmlUtils.getStringAttribute(elementoArtigo, "NOME-DO-EVENTO");
+                NodeList listaNodes = elementoArtigo.getElementsByTagName("DETALHAMENTO-DO-TRABALHO");
+                Element node = (Element) listaNodes.item(0);
+                nomePublicacao = node.getAttribute("NOME-DO-EVENTO");
             }
             else{
-                nomePublicacao = XmlUtils.getStringAttribute(elementoArtigo, "TITULO-DO-PERIODICO-OU-REVISTA");
+                //nomePublicacao = XmlUtils.getStringAttribute(elementoArtigo, "TITULO-DO-PERIODICO-OU-REVISTA");
+                NodeList listaNodes = elementoArtigo.getElementsByTagName("DETALHAMENTO-DO-ARTIGO");
+                Element node = (Element) listaNodes.item(0);
+                nomePublicacao = node.getAttribute("TITULO-DO-PERIODICO-OU-REVISTA");
             }
             for(Element entrada : entradas)
             {

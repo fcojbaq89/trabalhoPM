@@ -103,8 +103,8 @@ public class Curriculum {
         List<Element> listaMestradoConcluido= PegaXml.getElementosXml(path, "ORIENTACOES-CONCLUIDAS-PARA-MESTRADO");
         List<Element> listaGraduacaoConcluido= PegaXml.getElementosXml(path, "OUTRAS-ORIENTACOES-CONCLUIDAS");
         
-        List<Element> listaArtigosEmRevistas = PegaXml.getElementosXml(path, "TRABALHO-EM-EVENTOS");
-        List<Element> listaArtigosEmEventos = PegaXml.getElementosXml(path, "ARTIGO-PUBLICADO");
+        List<Element> listaArtigosEmRevistas = PegaXml.getElementosXml(path, "ARTIGO-PUBLICADO");
+        List<Element> listaArtigosEmEventos = PegaXml.getElementosXml(path, "TRABALHO-EM-EVENTOS");
         
         //classificando os artigos de acordo com qualis.xml
         List<Artigo> listaArtigosEventosClassificados = Artigo.classificaArtigos(listaArtigosEmEventos, "evento");
@@ -117,6 +117,7 @@ public class Curriculum {
             switch(classificacao) //A1,	A2, B1, B2, B3, B4, C e	N/C
             {
                 case "A1": this.revistaA1++;
+                    System.out.println("ENTROU");
                     break;
                 case "A2": this.revistaA2++;
                     break;

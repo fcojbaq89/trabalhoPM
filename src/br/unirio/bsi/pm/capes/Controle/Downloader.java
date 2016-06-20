@@ -35,6 +35,8 @@ public class Downloader {
 	{
 		String nome = url.substring(url.lastIndexOf("/")+1); //manipulando a string para pegar somente a ultima parte
 		File arquivo = new File(CAMINHO_DO_USUARIO + "/xml/" + nome);
+                File diretorio = new File(CAMINHO_DO_USUARIO + "/xml");
+                diretorio.mkdir();
 		try {
 			URL website = new URL(url);
 			ReadableByteChannel rbc = Channels.newChannel(website.openStream());
