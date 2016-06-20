@@ -75,6 +75,7 @@ class Artigo {
                 if(nomePublicacao == null ? regex == null : nomePublicacao.equalsIgnoreCase(regex)) //verifica se o nome do artigo eh igual a regex
                 {
                     artigo.setClassificacao(entrada.getAttribute("class")); //seta classificacao no objeto artigo
+                    break;
                 }
                 else{
                     artigo.setClassificacao("N/C");
