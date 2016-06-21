@@ -43,48 +43,21 @@ public class MainController {
         
         //setando valores nos objetos (WORK IN PROGRESS)
         
-        List<Element> linhasXml = PegaXml.getElementosXml("xml/contents.xml", "linha");
-        
-        List<Linha> listaDeLinhas = new ArrayList<Linha>();
-        for(Element linha : linhasXml)
-        {
-            Linha ln = new Linha();
-            ln.setNome(XmlUtils.getStringAttribute(linha, "nome"));
-            listaDeLinhas.add(ln);
-            
-            List<Element> professoresXml = XmlUtils.getElements(linha, "professor");
-            List<Professor> listaDeProfessores = new ArrayList<Professor>();
-            
-            for(Element professor : professoresXml)
-            {
-                Professor prof = new Professor();
-                prof.setNome(XmlUtils.getStringAttribute(professor, "nome"));
-                prof.setCodigo(XmlUtils.getStringAttribute(professor, "codigo"));
-                
-                Curriculum c = new Curriculum();
-                c.leXmlCurriculo(prof.getCodigo());
-                prof.setCurriculo(c);
-                
-                listaDeProfessores.add(prof);
-            }
-            
-            ln.setProfessores(listaDeProfessores);
-        }
-        
-        p.setLinhas(listaDeLinhas);
+        p.setLinhas(Linha.leXml());
         
         //PARTE FINAL ==========================================================
         //escrevendo o arquivo txt
         PrintWriter writer = new PrintWriter(CAMINHO_DO_USUARIO + "/" + p.getNome() + ".txt", "UTF-8");
         
-        writer.println("Nome " + "Participações em bancas de Doutorado " + //printando nomes das colunas da tabela
+        /*writer.println("Nome " + "Participações em bancas de Doutorado " + //printando nomes das colunas da tabela
         "Participações em bancas de Mestrado " + "Participações em bancas de Graduacao " +
         "Orientações de Doutorado concluídas " + "Orientações de Mestrado concluídas " +
         "Orientações de projeto final de Graduação concluídas " + "Orientações de Doutorado em andamento " +
         "Orientações de Doutorado em andamento " + "Orientações de projeto final de Graduação em andamento "
-        );
+        );*/
         writer.println("");
         
+        List<Linha> listaDeLinhas = p.getLinhas();
         for(Linha linha : listaDeLinhas)
         {
             List<Professor> profsDaLinha = linha.getProfessores();
