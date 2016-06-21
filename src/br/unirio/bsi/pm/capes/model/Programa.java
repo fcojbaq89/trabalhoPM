@@ -13,21 +13,21 @@ import br.unirio.bsi.pm.capes.Controle.PegaXml;
 import br.unirio.bsi.pm.gpxcleaner.xml.XmlUtils;
 
 /**
-* @author fcojbaq89
-*/
+ * @author fcojbaq89
+ */
 public class Programa {
 
 	String nome;
 	List<Linha> linhas;
-        private float[] media;
+	private float[] media;
 
-    public float[] getMedia() {
-        return media;
-    }
+	public float[] getMedia() {
+		return media;
+	}
 
-    public void setMedia(float[] media) {
-        this.media = media;
-    }
+	public void setMedia(float[] media) {
+		this.media = media;
+	}
 
 	public Programa() {
 		super();
@@ -74,7 +74,7 @@ public class Programa {
 		} else if (!nome.equals(other.nome))
 			return false;
 		return true;
-                
+
 	}
 
 	public String getNome() {
@@ -100,48 +100,48 @@ public class Programa {
 		else
 			return "Programa [nome=" + nome + ", linhas=" + linhas + "]";
 	}
-        
-        public String leXml() throws ParserConfigurationException, SAXException, IOException
-        {
-            Element programas = PegaXml.getXmlRoot(System.getProperty("user.dir") + "/xml/programas.xml");
-            Element programa = XmlUtils.getSingleElement(programas, "programa");
-            String nomePrograma = XmlUtils.getStringAttribute(programa, "nome");
-            
-            return nomePrograma;
-        }
-        
-        public void calculaMedia()
-        {
-            float[] total = {0.0f,0.0f,0.0f,0.0f,0.0f,0.0f,0.0f,0.0f,0.0f,
-                0.0f,0.0f,0.0f,0.0f,0.0f,0.0f,0.0f,0.0f,0.0f,
-                0.0f,0.0f,0.0f,0.0f,0.0f,0.0f,0.0f};
-            List<Linha> lns = this.getLinhas();
-            float totalProfessores= 0;
-            
-            for(Linha linha: lns)
-            {
-                List<Professor> professores = linha.getProfessores();
-                for(Professor professor : professores)
-                {
-                    Curriculum curriculo = professor.getCurriculo();
-                    int [] dadosCurriculo = curriculo.pegaDadosCurriculo();
-                    for(int i = 0; i < dadosCurriculo.length; i++)
-                    {
-                        total[i] = total[i] + dadosCurriculo[i];
-                    }
-                    totalProfessores++;
-                }
-                
-            }
-            
-            float [] medias = new float[25];
-            for(int j =0; j < 25; j++)
-            {
-                medias[j] = total[j]/totalProfessores;
-            }
-            
-            this.setMedia(medias);
-            
-        }
+
+	public String leXml() throws ParserConfigurationException, SAXException, IOException
+	{
+		Element programas = PegaXml.getXmlRoot(System.getProperty("user.dir") + "/xml/programas.xml");
+		Element programa = XmlUtils.getSingleElement(programas, "programa");
+		String nomePrograma = XmlUtils.getStringAttribute(programa, "nome");
+
+		return nomePrograma;
+	}
+
+	public void calculaMedia()
+	{
+		float[] total = {0.0f,0.0f,0.0f,0.0f,0.0f,0.0f,0.0f,0.0f,0.0f,
+				0.0f,0.0f,0.0f,0.0f,0.0f,0.0f,0.0f,0.0f,0.0f,
+				0.0f,0.0f,0.0f,0.0f,0.0f,0.0f,0.0f};
+		List<Linha> lns = this.getLinhas();
+		float totalProfessores= 0;
+
+		for(Linha linha: lns)
+		{
+			List<Professor> professores = linha.getProfessores();
+			for(Professor professor : professores)
+			{
+				Curriculum curriculo = professor.getCurriculo();
+				int [] dadosCurriculo = curriculo.pegaDadosCurriculo();
+				for(int i = 0; i < dadosCurriculo.length; i++)
+				{
+					total[i] = total[i] + dadosCurriculo[i];
+				}
+				totalProfessores++;
+			}
+
+		}
+
+		float [] medias = new float[25];
+		for(int j =0; j < 25; j++)
+		{
+			medias[j] = total[j]/totalProfessores;
+		}
+
+		this.setMedia(medias);
+
+	}
 
 }
