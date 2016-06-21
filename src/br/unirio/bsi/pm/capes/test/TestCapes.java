@@ -9,6 +9,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.junit.Test;
 import org.xml.sax.SAXException;
 
+import br.unirio.bsi.pm.capes.model.Linha;
 import br.unirio.bsi.pm.capes.model.Programa;
 
 public class TestCapes  {
@@ -22,15 +23,11 @@ public class TestCapes  {
 	
 	@Test
     public void TestNumeroLinhasPrograma() throws ParserConfigurationException, SAXException, IOException {
-		Programa programa = new Programa();
-    	programa.setNome(programa.leXml());
-        assertEquals(3, programa.getLinhas().size());
+        assertEquals(3, Linha.leXml().size());
     }
 	
 	@Test
     public void TestNumeroProfessoresTerceraLinha() throws ParserConfigurationException, SAXException, IOException{
-		Programa programa = new Programa();
-    	programa.setNome(programa.leXml());
-        assertEquals(7, programa.getLinhas().get(0).getProfessores().size());
+        assertEquals(7, Linha.leXml().get(2).getProfessores().size());
     }
 }

@@ -4,14 +4,11 @@ import br.unirio.bsi.pm.capes.model.Curriculum;
 import br.unirio.bsi.pm.capes.model.Linha;
 import br.unirio.bsi.pm.capes.model.Professor;
 import br.unirio.bsi.pm.capes.model.Programa;
-import br.unirio.bsi.pm.gpxcleaner.xml.XmlUtils;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import javax.xml.parsers.ParserConfigurationException;
-import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 /**
  *
