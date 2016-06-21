@@ -117,7 +117,6 @@ public class Curriculum {
             switch(classificacao) //A1,	A2, B1, B2, B3, B4, C e	N/C
             {
                 case "A1": this.revistaA1++;
-                    System.out.println("ENTROU");
                     break;
                 case "A2": this.revistaA2++;
                     break;

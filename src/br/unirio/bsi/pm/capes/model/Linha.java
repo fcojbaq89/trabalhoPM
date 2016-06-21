@@ -1,7 +1,13 @@
 package br.unirio.bsi.pm.capes.model;
 
+import br.unirio.bsi.pm.capes.Controle.PegaXml;
+import br.unirio.bsi.pm.gpxcleaner.xml.XmlUtils;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.parsers.ParserConfigurationException;
+import org.w3c.dom.Element;
+import org.xml.sax.SAXException;
 
 public class Linha {
 
@@ -101,6 +107,39 @@ public class Linha {
             }
             
             this.setMedia(medias);
+        }
+        
+        public static List<Linha> leXml() throws ParserConfigurationException, SAXException, IOException
+        {
+             List<Element> linhasXml = PegaXml.getElementosXml("xml/contents.xml", "linha");
+        
+            List<Linha> listaDeLinhas = new ArrayList<Linha>();
+            for(Element linha : linhasXml)
+            {
+                Linha ln = new Linha();
+                ln.setNome(XmlUtils.getStringAttribute(linha, "nome"));
+                listaDeLinhas.add(ln);
+
+                List<Element> professoresXml = XmlUtils.getElements(linha, "professor");
+                List<Professor> listaDeProfessores = new ArrayList<Professor>();
+
+                for(Element professor : professoresXml)
+                {
+                    Professor prof = new Professor();
+                    prof.setNome(XmlUtils.getStringAttribute(professor, "nome"));
+                    prof.setCodigo(XmlUtils.getStringAttribute(professor, "codigo"));
+
+                    Curriculum c = new Curriculum();
+                    c.leXmlCurriculo(prof.getCodigo());
+                    prof.setCurriculo(c);
+
+                    listaDeProfessores.add(prof);
+                }
+
+                ln.setProfessores(listaDeProfessores);
+            }
+        
+            return listaDeLinhas;
         }
 
 }
